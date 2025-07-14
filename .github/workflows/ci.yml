@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2  
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -19,6 +27,13 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'     
+          
       - name: Build and test with Maven
         run: mvn -B package --file pom.xml
+
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: orbit-backend
+          path: target/*.jar
 
