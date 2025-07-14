@@ -18,7 +18,9 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'
+          distribution: 'temurin'     
+      - name: List files in the repository
+        run: ls -R
 
 
       - name: Build and test with Maven
