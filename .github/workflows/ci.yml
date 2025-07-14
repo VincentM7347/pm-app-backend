@@ -19,11 +19,6 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'     
-      - name: List files in the repository
-        run: ls -R
-
-
       - name: Build and test with Maven
-        working-directory: ./pm-app-backend
         run: mvn -B package --file pom.xml
 
